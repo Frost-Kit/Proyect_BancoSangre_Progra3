@@ -1,0 +1,1 @@
+namespace Proyect_BancoSangre_Consola.Cristhian.IntentosRiesgosos;

@@ -42,7 +42,7 @@ public class Personal : Persona
                           $"===========================================\n");
     }
 
-    public void ActualizarDatos()
+    public override void ActualizarDatos()
     {
         ConsoleKey opcionActualizar = ConsoleKey.None;
         do
@@ -220,7 +220,7 @@ public class GestionPersonal : IGestionar
     }
 
     // Esto retorna el indice del personal buscado
-    public int Buscar(Guid idBuscado)
+    public int BuscarIndice(Guid idBuscado)
     {
         foreach (var personal in Lista)
         {
@@ -230,7 +230,7 @@ public class GestionPersonal : IGestionar
         return -1;
     }
 
-    public int Buscar(string ci)
+    public int BuscarIndice(string ci)
     {
         foreach (var personal in Lista)
         {
@@ -240,6 +240,25 @@ public class GestionPersonal : IGestionar
         return -1;
     }
 
+    public void Buscar()
+    {
+        Console.Clear();
+        Console.WriteLine("Buscar Personal\n" +
+                          "Ingrese el CI del personal a buscar -> ");
+        string ciObjetivo = Console.ReadLine().Trim();
+        
+        int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
+        
+        if (indiceObjetivo == -1)
+        {
+            Console.WriteLine("*** Personal no encontrado ***");
+            return;
+        }
+        
+        Lista[indiceObjetivo].MostrarDatos();
+        
+    }
+
     public void Actualizar()
     {
         Console.Clear();
@@ -247,7 +266,7 @@ public class GestionPersonal : IGestionar
                           "Ingrese el CI del personal objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
-        int indiceObjetivo = Buscar(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
+        int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
         
         if (indiceObjetivo == -1)
         {
@@ -266,7 +285,7 @@ public class GestionPersonal : IGestionar
                           "Ingrese el CI del personal objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
-        int indiceObjetivo = Buscar(ciObjetivo);
+        int indiceObjetivo = BuscarIndice(ciObjetivo);
         
         if (indiceObjetivo == -1)
         {

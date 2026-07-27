@@ -7,10 +7,11 @@ public interface IGestionar
     
     void Registrar();
     void Listar();
+    void Buscar();
     void Actualizar();
     void Eliminar();
     
     // Metodo sobrecargado para buscar al elemento
-    int Buscar(Guid idBuscar);
-    int Buscar(string ci); // nose si daria con la unidades de sangre
+    int BuscarIndice(Guid idBuscar);
+    int BuscarIndice(string ci); // nose si daria con la unidades de sangre
 }

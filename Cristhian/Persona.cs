@@ -1,6 +1,7 @@
+using Proyect_BancoSangre_Consola.Cristhian.IntentosRiesgosos;
 namespace Proyect_BancoSangre_Consola.Cristhian;
 
-public abstract class Persona : INotificar
+public abstract class Persona : INotificar//, IMostrable, IActualizable
 {
     // Atributos privados
     private string _nombre;
@@ -107,6 +108,8 @@ public abstract class Persona : INotificar
 
     // Metodos Abstractos usados
     public abstract void MostrarDatos();
+    
+    public abstract void ActualizarDatos();
     
     // Metodo de la interfaz
     public void Notificar(string mensaje, string medio)

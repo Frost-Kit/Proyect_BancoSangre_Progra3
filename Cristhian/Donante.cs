@@ -107,7 +107,7 @@ public class Donante : Persona
                           $"===========================================\n");
     }
 
-    public void ActualizarDatos()
+    public override void ActualizarDatos()
     {
         ConsoleKey opcionActualizar;
         do
@@ -339,17 +339,17 @@ public class GestionDonante : IGestionar
     
     // Esto devuelve el indice, asi consultan en la lista con el indice que les de
     // Ejemplo: GestionPersonal.Lista[indiceObjetivo].MostrarDatos();
-    public int Buscar(Guid idBuscado)
+    public int BuscarIndice(Guid idBuscado)
     {
-        foreach (var personal in Lista)
+        foreach (var donante in Lista)
         {
-            if (personal.IdDonante == idBuscado) return Lista.IndexOf(personal);
+            if (donante.IdDonante == idBuscado) return Lista.IndexOf(donante);
         }
         
         return -1;
     }
 
-    public int Buscar(string ci)
+    public int BuscarIndice(string ci)
     {
         foreach (var personal in Lista)
         {
@@ -359,14 +359,32 @@ public class GestionDonante : IGestionar
         return -1;
     }
 
+    public void Buscar()
+    {
+        Console.Clear();
+        Console.WriteLine("Buscar Donante\n" +
+                          "Ingrese el CI del donante a buscar -> ");
+        string ciObjetivo = Console.ReadLine().Trim();
+        
+        int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
+
+        if (indiceObjetivo == -1)
+        {
+            Console.WriteLine("*** Donante no encontrado ***");
+            return;
+        }
+        
+        Lista[indiceObjetivo].MostrarDatos();
+    }
+
     public void Actualizar()
     {
         Console.Clear();
         Console.WriteLine("Actualizar Donante\n" +
-                          "Ingrese el CI del personal objetivo -> ");
+                          "Ingrese el CI del donante objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
-        int indiceObjetivo = Buscar(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
+        int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
 
         if (indiceObjetivo == -1)
         {
@@ -381,10 +399,10 @@ public class GestionDonante : IGestionar
     {
         Console.Clear();
         Console.WriteLine("Eliminar Donante\n" +
-                          "Ingrese el CI del personal objetivo -> ");
+                          "Ingrese el CI del donante objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
-        int indiceObjetivo = Buscar(ciObjetivo);
+        int indiceObjetivo = BuscarIndice(ciObjetivo);
         
         if (indiceObjetivo == -1)
         {
