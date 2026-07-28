@@ -79,8 +79,8 @@ public class Personal : Persona
                     break;
                 case ConsoleKey.D4:
                     Console.Write($" - Correo Electronico ACTUAL => {CorreoElectronico} -\n" +
-                                  $"Ingrese el nuevo Correo Electronico -> ");
-                    CorreoElectronico = Console.ReadLine().Trim();
+                                  $"Ingrese el nuevo Correo Electronico");
+                    CorreoElectronico = ILeerYValidar.Correo();
                     break;
                 case ConsoleKey.D5:
                     Console.Write($" - Edad ACTUAL => {Edad} -\n" +
@@ -176,8 +176,8 @@ public class GestionPersonal : IGestionar
             string ci = Console.ReadLine().Trim();
             Console.Write(" Telefono -> ");
             string telefono = Console.ReadLine().Trim();
-            Console.Write(" Correo Electronico -> ");
-            string email = Console.ReadLine().Trim();
+            Console.Write(" Correo Electronico");
+            string email = ILeerYValidar.Correo();
             Console.Write(" Edad");
             byte edad = ILeerYValidar.Byteee();
             Console.Write(" Cargo -> ");

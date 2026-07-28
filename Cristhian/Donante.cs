@@ -8,13 +8,20 @@ public enum TipoSangre
     O
 }
 
+public enum TipoRH
+{
+    Positivo,
+    Negativo
+}
+
 public class Donante : Persona
 {
     private Guid _idDonante;
     private TipoSangre _tipoSangre;
+    private TipoRH _rh;
     private double _peso;
     private double _altura;
-    private List<DateTimeOffset> _historialDonaciones;
+    private List<Guid> _historialDonaciones;
 
     public Guid IdDonante
     {
@@ -26,6 +33,12 @@ public class Donante : Persona
     {
         get { return _tipoSangre; }
         protected set { _tipoSangre = value; }
+    }
+
+    public TipoRH RH
+    {
+        get { return _rh; }
+        protected set { _rh = value; }
     }
 
     public double Peso
@@ -40,7 +53,7 @@ public class Donante : Persona
         protected set { _altura = value; }
     }
 
-    public List<DateTimeOffset> HistorialDonaciones
+    public List<Guid> HistorialDonaciones
     {
         get { return _historialDonaciones; }
         protected set { _historialDonaciones = value; }
@@ -52,15 +65,16 @@ public class Donante : Persona
         TipoSangre = TipoSangre.O;
         Peso = 0.0;
         Altura = 0.0;
-        HistorialDonaciones = new List<DateTimeOffset>();
+        HistorialDonaciones = new List<Guid>();
     }
 
     public Donante(Guid idDonante, string nombre, string ci, string telefono, string email, byte edad,
-         TipoSangre tipoSangre, double peso, double altura, List<DateTimeOffset> historialDonaciones = null)
+         TipoSangre tipoSangre, TipoRH tipoRH, double peso, double altura, List<Guid> historialDonaciones = null)
         : base(nombre, ci, telefono, email, edad)
     {
         IdDonante = idDonante;
         TipoSangre = tipoSangre;
+        RH = tipoRH;
         Peso = peso;
         Altura = altura;
         if (historialDonaciones == null) HistorialDonaciones = [];
@@ -71,9 +85,13 @@ public class Donante : Persona
     {
         string histoFormateado = string.Empty;
 
-        foreach (var histo in HistorialDonaciones)
+        foreach (var donacion in HistorialDonaciones)
         {
-            histoFormateado += $"  * {histo.ToString("dd/MM/yyyy hh:mm tt")}\n";
+            // POR HACER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // Necesito el 
+            //int indiceDonacion = GestionDonaciones.Lista[donacion].Fecha;
+            //histoFormateado += $"  * {donacion.ToString("yyyy/MM/dd hh:mm tt")}\n";
+            histoFormateado += $"  * {donacion.ToString("yyyy/MM/dd hh:mm tt")}\n";
         }
 
         return histoFormateado;
@@ -89,12 +107,10 @@ public class Donante : Persona
                           $" - Telefono: {Telefono}\n" +
                           $" - Email: {CorreoElectronico}\n" +
                           $" - Edad: {Edad}\n" +
-                          $" - Tipo de Sangre: {TipoSangre}\n" +
+                          $" - Tipo de Sangre: {TipoSangre}{ (RH == TipoRH.Positivo? '+': '-') }\n" +
+                          $" - Tipo de RH: {RH}\n" +
                           $" - Peso: {Peso}\n" +
                           $" - Altura: {Altura}\n" +
-                          $"--------------------------------------------\n" +
-                          $"\tHISTORIAL DE DONACIONES:\n" +
-                          $"  * {FormatearHistorial()}" +
                           $"===========================================\n");
     }
 
@@ -120,8 +136,9 @@ public class Donante : Persona
                           $"\t     ├ 4 para Cambiar el Correo electronico\n" +
                           $"\t     ├ 5 para Cambiar la Edad\n" +
                           $"\t     ├ 6 para Cambiar el Tipo de sangre\n" +
-                          $"\t     ├ 7 para Cambiar el Peso\n" +
-                          $"\t     └ 8 para Cambiar la Altura\n" +
+                          $"\t     ├ 7 para Cambiar el Tipo de RH\n" +
+                          $"\t     ├ 8 para Cambiar el Peso\n" +
+                          $"\t     └ 9 para Cambiar la Altura\n" +
                           $"\t0 para VOLVER al menu anterior.\n");
             opcionActualizar = Console.ReadKey().Key;
 
@@ -150,8 +167,8 @@ public class Donante : Persona
 
                 case ConsoleKey.D4:
                     Console.Write($" - Correo Electronico ACTUAL => {CorreoElectronico} -\n" +
-                                  $"Ingrese el nuevo Correo Electronico -> ");
-                    CorreoElectronico = Console.ReadLine().Trim();
+                                  $"Ingrese el nuevo Correo Electronico");
+                    CorreoElectronico = ILeerYValidar.Correo();
                     Console.Clear();
                     break;
 
@@ -164,20 +181,31 @@ public class Donante : Persona
 
                 case ConsoleKey.D6:
                     Console.Write($" - Tipo de Sangre ACTUAL => {TipoSangre} -\n" +
-                                  $"Ingrese el nuevo tipo de sangre -> ");
+                                  $"Ingrese el nuevo tipo de sangre\n" +
+                                  $"     Opciones Validas: A - B - AB - O\n" +
+                                  $" Aqui -> ");
                     TipoSangre = Enum.TryParse(Console.ReadLine().Trim(), true, out TipoSangre tipoSangreValidada) ?
                         tipoSangreValidada : TipoSangre.O;
                     Console.Clear();
                     break;
 
                 case ConsoleKey.D7:
+                    Console.Write($" - Tipo RH ACTUAL => {RH} -\n" +
+                                  $"Ingrese el nuevo tipo RH\n" +
+                                  $"     Opciones Validas: Positivo - Negativo\n" +
+                                  $" Aqui");
+                    RH = ILeerYValidar.Rhhh();
+                    Console.Clear();
+                    break;
+
+                case ConsoleKey.D8:
                     Console.Write($" - Peso ACTUAL => {Peso} -\n" +
                                   $"Ingrese el nuevo peso");
                     Peso = ILeerYValidar.Doubleee();
                     Console.Clear();
                     break;
 
-                case ConsoleKey.D8:
+                case ConsoleKey.D9:
                     Console.Write($" - Altura ACTUAL => {Altura} -\n" +
                                   $"Ingrese la nueva altura");
                     Altura = ILeerYValidar.Doubleee();
@@ -194,9 +222,9 @@ public class Donante : Persona
         } while (opcionActualizar != ConsoleKey.D0);
     }
 
-    public void RegistrarDonancion(DateTimeOffset fecha) => HistorialDonaciones.Add(fecha);
+    public void RegistrarDonancion(Guid IdDonacion) => HistorialDonaciones.Add(IdDonacion);
 
-    public DateTimeOffset DarUltimafechaDonacion() => HistorialDonaciones[^1];
+    public Guid DarUltimafechaDonacion() => HistorialDonaciones[^1];
 }
 
 public class GestionDonante : IGestionar
@@ -224,13 +252,13 @@ public class GestionDonante : IGestionar
             {
                 var datosDonante = linea.Split('░');
 
-                List<DateTimeOffset> histoTemp = [];
+                List<Guid> histoTemp = [];
                 
-                foreach (var fechaaaa in datosDonante[9].Split('▒'))
+                foreach (var idDonan in datosDonante[10].Split('▒'))
                 {
-                    histoTemp.Add(DateTimeOffset.Parse(fechaaaa));
+                    histoTemp.Add(Guid.Parse(idDonan));
                 }
-                //histoTemp.AddRange(datosDonante[9].Split('▒').Select(fechaaaa => DateTimeOffset.Parse(fechaaaa)));
+                //histoTemp.AddRange(datosDonante[10].Split('▒').Select(fechaaaa => DateTime.Parse(fechaaaa)));
 
                 Lista.Add( new Donante(
                     Guid.Parse(datosDonante[0]),
@@ -240,8 +268,9 @@ public class GestionDonante : IGestionar
                     datosDonante[4],
                     Convert.ToByte(datosDonante[5]),
                     Enum.Parse<TipoSangre>(datosDonante[6]),
-                    Convert.ToDouble(datosDonante[7]),
+                    Enum.Parse<TipoRH>(datosDonante[7]),
                     Convert.ToDouble(datosDonante[8]),
+                    Convert.ToDouble(datosDonante[9]),
                     histoTemp
                     )
                 );
@@ -287,19 +316,25 @@ public class GestionDonante : IGestionar
             string ci = Console.ReadLine();
             Console.Write(" Telefono -> ");
             string telefono = Console.ReadLine();
-            Console.Write(" Correo Electronico -> ");
-            string email = Console.ReadLine();
+            Console.Write(" Correo Electronico");
+            string email = ILeerYValidar.Correo();
             Console.Write(" Edad");
             byte edad = ILeerYValidar.Byteee();
-            Console.Write(" Tipo de sangre -> ");
+            Console.Write(" Tipo de sangre\n" +
+                          "Opciones Validas: A - B - AB - O\n" +
+                          " -> ");
             TipoSangre tipSangre = Enum.TryParse(Console.ReadLine().Trim(),true, out TipoSangre tipoSangreValidada) ? 
                 tipoSangreValidada : TipoSangre.O;
+            Console.Write(" Tipo de RH\n" +
+                          "Opciones Validas: Positivo - Negativo\n" +
+                          " Aqui");
+            TipoRH tipRh = ILeerYValidar.Rhhh();
             Console.Write(" Peso");
             double peso = ILeerYValidar.Doubleee();
             Console.Write(" Altura");
             double altura = ILeerYValidar.Doubleee();
             
-            Lista.Add( new Donante( Guid.CreateVersion7(), nombre, ci, telefono, email, edad, tipSangre, peso, altura) );
+            Lista.Add( new Donante( Guid.CreateVersion7(), nombre, ci, telefono, email, edad, tipSangre, tipRh, peso, altura) );
             
             Console.Write("Donante Registrado!!!\n" +
                           "Pulse:\n" +
@@ -407,6 +442,18 @@ public class GestionDonante : IGestionar
         if (indiceObjetivo == -1)
         {
             Console.WriteLine("*** Donante no encontrado ***");
+            return;
+        }
+
+        Console.Write($"Donante por Eliminar\n" +
+            $"Nombre: {Lista[indiceObjetivo].Nombre} | CI: {Lista[indiceObjetivo].Nombre}\n" +
+            $"CONFIRMACION\n" +
+            $"¿Esta Seguro de Eliminar a este Donante?");
+        string opcionConfirmar = Console.ReadLine();
+
+        if (opcionConfirmar.ToLower() == "no")
+        {
+            Console.WriteLine("Se Cancelo la eliminacion, Volviendo...");
             return;
         }
         

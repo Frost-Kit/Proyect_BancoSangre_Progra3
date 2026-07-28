@@ -3,6 +3,27 @@
 // No se si esto este bien XD
 public interface ILeerYValidar
 {
+    static string Correo()
+    {
+        string correoValidado;
+        string mensaje = " -> ";
+        bool esCorrecto = false;
+        do
+        {
+            Console.Write(mensaje);
+            correoValidado = Console.ReadLine();
+
+            if (correoValidado.Contains('@') && correoValidado.Length >= 7)
+            {
+                esCorrecto = true;
+                return correoValidado;
+            }
+            mensaje = "Error: Intente de nuevo -> ";
+
+        } while (!esCorrecto);
+
+        return "Esta MAL";
+    }
     static byte Byteee()
     {
         byte byteValidado;
@@ -46,5 +67,35 @@ public interface ILeerYValidar
         } while (!esDouble);
 
         return doubleValidado;
+    }
+
+    static TipoRH Rhhh()
+    {
+        TipoRH rhValidado;
+        string mensaje = " -> ";
+        bool esRHValido;
+        do
+        {
+            Console.Write(mensaje);
+            esRHValido = Enum.TryParse<TipoRH>(Console.ReadLine(), true, out rhValidado);
+            mensaje = "Intente de nuevo -> ";
+        } while (!esRHValido);
+
+        return rhValidado;
+    }
+
+    static TipoSangre TipoSangreee()
+    {
+        TipoSangre tipoSangreValidada;
+        string mensaje = " -> ";
+        bool esTipoSangreValida;
+        do
+        {
+            Console.Write(mensaje);
+            esTipoSangreValida = Enum.TryParse<TipoSangre>(Console.ReadLine(), true, out tipoSangreValidada);
+            mensaje = "Intente de nuevo -> ";
+        } while (!esTipoSangreValida);
+
+        return tipoSangreValidada;
     }
 }
