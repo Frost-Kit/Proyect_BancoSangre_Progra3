@@ -7,23 +7,41 @@ public interface ILeerYValidar
     {
         string correoValidado;
         string mensaje = " -> ";
-        bool esCorrecto = false;
-        do
+        byte puntosValidos = 0;
+        
+        while (true)
         {
             Console.Write(mensaje);
             correoValidado = Console.ReadLine();
 
-            if (correoValidado.Contains('@') && correoValidado.Length >= 7)
+            if ( !correoValidado.Contains('@') )
             {
-                esCorrecto = true;
-                return correoValidado;
+                mensaje = "*** Error: no contiene @ ***\n" +
+                          " Intente de nuevo -> ";
+                puntosValidos = 0;
             }
-            mensaje = "Error: Intente de nuevo -> ";
+            else puntosValidos++;
+            
+            if ( !(correoValidado.Contains(".com") || correoValidado.Contains(".net")) )
+            {
+                mensaje = "*** Error: no contiene .com ni .net ***\n" +
+                          " Intente de nuevo -> ";
+                puntosValidos = 0;
+            }
+            else puntosValidos++;
 
-        } while (!esCorrecto);
+            if ( !(correoValidado.Length >= 6) )
+            {
+                mensaje = "*** Error: El correo debe ser de almenos 6 caracteres ***\n" +
+                          " Intente de nuevo -> ";
+                puntosValidos = 0;
+            }
+            else puntosValidos++;
 
-        return "Esta MAL";
+            if (puntosValidos == 3) return correoValidado;
+        }
     }
+    
     static byte Byteee()
     {
         byte byteValidado;
