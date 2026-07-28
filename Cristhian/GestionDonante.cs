@@ -26,11 +26,15 @@ public class GestionDonante : IGestionar
                 var datosDonante = linea.Split('░');
 
                 List<Guid> histoTemp = [];
-                
-                foreach (var idDonan in datosDonante[10].Split('▒'))
+
+                if (datosDonante.Length == 11)
                 {
-                    histoTemp.Add(Guid.Parse(idDonan));
+                    foreach (var idDonan in datosDonante[10].Split('▒'))
+                    {
+                        histoTemp.Add(Guid.Parse(idDonan));
+                    }
                 }
+                
                 //histoTemp.AddRange(datosDonante[10].Split('▒').Select(fechaaaa => DateTime.Parse(fechaaaa)));
 
                 Lista.Add( new Donante(
@@ -60,16 +64,34 @@ public class GestionDonante : IGestionar
         {
             foreach (var personal in Lista)
             {
-                archivoDonante.WriteLine($"{personal.IdDonante}░" +
-                                          $"{personal.Nombre}░" +
-                                          $"{personal.CI}░" +
-                                          $"{personal.Telefono}░" +
-                                          $"{personal.CorreoElectronico}░" +
-                                          $"{personal.Edad}░" +
-                                          $"{personal.TipoSangre}░" +
-                                          $"{personal.Peso}░" +
-                                          $"{personal.Altura}░" +
-                                          $"{string.Join('▒',personal.HistorialDonaciones)}");
+                if (personal.HistorialDonaciones.Count == 0)
+                {
+                    archivoDonante.WriteLine($"{personal.IdDonante}░" +
+                                             $"{personal.Nombre}░" +
+                                             $"{personal.CI}░" +
+                                             $"{personal.Telefono}░" +
+                                             $"{personal.CorreoElectronico}░" +
+                                             $"{personal.Edad}░" +
+                                             $"{personal.TipoSangre}░" +
+                                             $"{personal.RH}░" +
+                                             $"{personal.Peso}░" +
+                                             $"{personal.Altura}");
+                }
+                else
+                {
+                    archivoDonante.WriteLine($"{personal.IdDonante}░" +
+                                             $"{personal.Nombre}░" +
+                                             $"{personal.CI}░" +
+                                             $"{personal.Telefono}░" +
+                                             $"{personal.CorreoElectronico}░" +
+                                             $"{personal.Edad}░" +
+                                             $"{personal.TipoSangre}░" +
+                                             $"{personal.RH}░" +
+                                             $"{personal.Peso}░" +
+                                             $"{personal.Altura}░" +
+                                             $"{string.Join('▒',personal.HistorialDonaciones)}");
+                }
+                
             }
         }
         Console.WriteLine("*** Guardado de datos exitoso!!! ***"); 
