@@ -16,9 +16,7 @@ public class GestionPersonal : IGestionar
     public void CargarArchivo()
     {
         if ( !File.Exists(_rutaArchivoPersonal) ) return;
-
-        Lista = new List<Personal>();
-
+        
         using (StreamReader archivoPersonal = new StreamReader(_rutaArchivoPersonal))
         {
             string linea;

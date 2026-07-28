@@ -38,6 +38,8 @@ public interface ILeerYValidar
             else puntosValidos++;
 
             if (puntosValidos == 3) return correoValidado;
+            
+            puntosValidos = 0;
         }
     }
     
