@@ -5,14 +5,13 @@ public interface ILeerYValidar
 {
     static string Correo()
     {
-        string correoValidado;
         string mensaje = " -> ";
         byte puntosValidos = 0;
         
         while (true)
         {
             Console.Write(mensaje);
-            correoValidado = Console.ReadLine();
+            string correoValidado = Console.ReadLine();
 
             if ( !correoValidado.Contains('@') )
             {

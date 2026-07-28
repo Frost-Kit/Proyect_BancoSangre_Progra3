@@ -1,4 +1,4 @@
-using Proyect_BancoSangre_Consola.Cristhian.IntentosRiesgosos;
+using Proyect_BancoSangre_Consola.Cristhian.NoProbado;
 namespace Proyect_BancoSangre_Consola.Cristhian;
 
 public abstract class Persona : INotificar//, IMostrable, IActualizable

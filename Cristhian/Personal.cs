@@ -49,15 +49,17 @@ public class Personal : Persona
         {
             Console.Clear();
             
-            Console.Write($" Actualizar Datos del Chambeador(ID: {IdPersonal})\n" +
-                          $"\tIngrese:\n" +
-                          $"\t     ├ 1 para Cambiar el nombre\n" +
-                          $"\t     ├ 2 para Cambiar el C.I.\n" +
-                          $"\t     ├ 3 para Cambiar el telefono\n" +
-                          $"\t     ├ 4 para Cambiar el Correo electronico\n" +
-                          $"\t     ├ 5 para Cambiar la Edad\n" +
-                          $"\t     └ 6 para Cambiar el Cargo\n" +
-                          $"\t0 para VOLVER al menu anterior.\n");
+            Console.Write($"\n Actualizar Datos del Chambeador (ID: {IdPersonal})\n" +
+                          $"╔════════════════════════════════════════════════╗\n" +
+                          $"║  Pulse:                                        ║\n" +
+                          $"║       ├ 1 para Cambiar el nombre               ║\n" +
+                          $"║       ├ 2 para Cambiar el C.I.                 ║\n" +
+                          $"║       ├ 3 para Cambiar el telefono             ║\n" +
+                          $"║       ├ 4 para Cambiar el Correo electronico   ║\n" +
+                          $"║       ├ 5 para Cambiar la Edad                 ║\n" +
+                          $"║       └ 6 para Cambiar el Cargo                ║\n" +
+                          $"║  0 para VOLVER al menu anterior.               ║\n" +
+                          $"╚════════════════════════════════════════════════╝\n");
             opcionActualizar = Console.ReadKey(true).Key;
 
             switch (opcionActualizar)

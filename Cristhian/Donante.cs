@@ -128,18 +128,20 @@ public class Donante : Persona
         ConsoleKey opcionActualizar;
         do
         {
-            Console.Write($" Actualizar Datos del DONANTE (ID: {IdDonante})\n" +
-                          $"\tPulse:\n" +
-                          $"\t     ├ 1 para Cambiar el nombre\n" +
-                          $"\t     ├ 2 para Cambiar el C.I.\n" +
-                          $"\t     ├ 3 para Cambiar el telefono\n" +
-                          $"\t     ├ 4 para Cambiar el Correo electronico\n" +
-                          $"\t     ├ 5 para Cambiar la Edad\n" +
-                          $"\t     ├ 6 para Cambiar el Tipo de sangre\n" +
-                          $"\t     ├ 7 para Cambiar el Tipo de RH\n" +
-                          $"\t     ├ 8 para Cambiar el Peso\n" +
-                          $"\t     └ 9 para Cambiar la Altura\n" +
-                          $"\t0 para VOLVER al menu anterior.\n");
+            Console.Write($"\n Actualizar Datos del DONANTE (ID: {IdDonante})\n" +
+                          $"╔════════════════════════════════════════════════╗\n" +
+                          $"║  Pulse:                                        ║\n" +
+                          $"║       ├ 1 para Cambiar el nombre               ║\n" +
+                          $"║       ├ 2 para Cambiar el C.I.                 ║\n" +
+                          $"║       ├ 3 para Cambiar el telefono             ║\n" +
+                          $"║       ├ 4 para Cambiar el Correo electronico   ║\n" +
+                          $"║       ├ 5 para Cambiar la Edad                 ║\n" +
+                          $"║       ├ 6 para Cambiar el Tipo de sangre       ║\n" +
+                          $"║       ├ 7 para Cambiar el Tipo de RH           ║\n" +
+                          $"║       ├ 8 para Cambiar el Peso                 ║\n" +
+                          $"║       └ 9 para Cambiar la Altura               ║\n" +
+                          $"║  0 para VOLVER al menu anterior.               ║\n" +
+                          $"╚════════════════════════════════════════════════╝\n");
             opcionActualizar = Console.ReadKey().Key;
 
             switch (opcionActualizar)

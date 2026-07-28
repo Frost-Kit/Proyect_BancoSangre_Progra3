@@ -1,4 +1,4 @@
-// namespace Proyect_BancoSangre_Consola.Cristhian.IntentosRiesgosos;
+// namespace Proyect_BancoSangre_Consola.Cristhian.NoProbado;
 //
 // public class GestorDonante : GestorBase<Donante>
 // {
