@@ -1,4 +1,7 @@
-namespace Proyect_BancoSangre_Progra3.Cristhian;
+using ProyectoBancoSangre.Clases;
+using ProyectoBancoSangre.Interfaces;
+
+namespace ProyectoBancoSangre.Gestores;
 
 public class GestionEmpleado : IGestionar
 {
@@ -66,7 +69,7 @@ public class GestionEmpleado : IGestionar
         do
         {
             Console.Write("--- REGISTRO DE EMPLEADO ---\n" +
-                          "Ingrese:\n" +
+                          "Ingrese los datos:\n" +
                           " Nombre");
             string nom = ILeerYValidar.Nombre();
             Console.Write(" C.I.");

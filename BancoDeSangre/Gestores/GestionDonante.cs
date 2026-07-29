@@ -1,4 +1,7 @@
-namespace Proyect_BancoSangre_Progra3.Cristhian;
+using ProyectoBancoSangre.Clases;
+using ProyectoBancoSangre.Interfaces;
+
+namespace ProyectoBancoSangre.Gestores;
 
 public class GestionDonante : IGestionar
 {

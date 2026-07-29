@@ -1,5 +1,6 @@
-using Proyect_BancoSangre_Progra3.Cristhian.NoProbado;
-namespace Proyect_BancoSangre_Progra3.Cristhian;
+using ProyectoBancoSangre.Interfaces;
+
+namespace ProyectoBancoSangre.Clases;
 
 public abstract class Persona : INotificar//, IMostrable, IActualizable
 {
