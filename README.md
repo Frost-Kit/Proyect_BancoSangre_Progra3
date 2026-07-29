@@ -47,19 +47,18 @@ dotnet run
 Notas:
 - Estos comandos crean una carpeta `ProyectoBancoSangre` con un proyecto .NET y copian allí las clases del repositorio.
 - Usar exactamente el nombre `ProyectoBancoSangre` evita conflictos de `namespace` al compilar.
-- Si `dotnet run` falla por namespaces o referencias, puedo generar un `ProyectoBancoSangre.csproj` preconfigurado dentro del repo.
 
 ---
 
 ## Ejecutar desde un IDE (GUI)
 
-- Visual Studio / Rider: Abrir la carpeta `BancoDeSangreApp` creada (o crear un nuevo `Console Project` y arrastrar las carpetas `Clases`, `Gestores`, `Interfaces` y `Program.cs`). Luego ejecutar con F5.
-- VS Code: Abrir la carpeta `BancoDeSangreApp`, instalar la extensión C# si se solicita y ejecutar `dotnet run` desde el terminal integrado.
+- Visual Studio / Rider: Abrir la carpeta `BancoDeSangre` creada (o crear un nuevo `Console Project` y arrastrar las carpetas `Clases`, `Gestores`, `Interfaces` y `Program.cs`). Luego ejecutar con F5.
+- VS Code: Abrir la carpeta `BancoDeSangre`, instalar la extensión C# si se solicita y ejecutar `dotnet run` desde el terminal integrado.
 
 ---
 
 
-## Explicación detallada de archivos y responsabilidades (para defender en presentación)
+## Explicación detallada de archivos y responsabilidades (¡¡¡IMPORTANTE!!!)
 
 - `BancoDeSangre/Program.cs` — `Program` : Punto de entrada. Explicar el flujo del menú principal, cómo se inicializan los gestores y cómo se orquesta la interacción entre módulos. Mencionar manejo de listas en memoria y llamadas a métodos de persistencia al finalizar (guardar/cargar).
 
@@ -67,7 +66,7 @@ Notas:
 
 - `BancoDeSangre/Interfaces/INotificar.cs` — `INotificar` : Interfaz para notificaciones. Señalar que las clases que implementan esta interfaz (por ejemplo `Persona`) pueden notificar vía distintos medios (simulado en consola), separando la lógica de negocio de la presentación.
 
-- `BancoDeSangre/Interfaces/ILeerYValidar.cs` — `ILeerYValidar` : Contiene helpers de entrada/validación reutilizables (lectura de nombres, CI, email, números, enums). Al presentarlo, resaltar la validación centralizada y cómo evita duplicar código en gestores.
+- `BancoDeSangre/Interfaces/ILeerYValidar.cs` — `ILeerYValidar` : Contiene metodos (estaticos) de entrada/validación reutilizables (lectura de nombres, CI, email, números, enums). Al presentarlo, resaltar la validación centralizada y cómo evita duplicar código en gestores.
 
 - `BancoDeSangre/Gestores/GestionDonante.cs` — `GestionDonante` : Responsable de la lista de `Donante`, validaciones de negocio (por ejemplo evitar duplicados por CI), persistencia en `Donante.txt`, y funciones de búsqueda/filtrado. Para defenderlo: mostrar el flujo de una operación CRUD (registro → validación → guardar en lista → persistir en archivo).
 
@@ -87,12 +86,8 @@ Notas:
 
 - `BancoDeSangre/Clases/Enumerdadores.cs` — `TipoSangre`, `TipoRH`, `EstadoUnidad` : Enumeradores para representar grupos, factores RH y estados; explíquen cómo ayudan a evitar errores por strings y facilitan validación.
 
-Consejos para la defensa técnica:
+*Consejos*:
 
 - Muestren la arquitectura en capas: `Program` → `Gestores` → `Clases` → `Interfaces`.
 - Destaquen principios de POO aplicados: encapsulación (validaciones en `Persona`/`UnidadExtraida`), herencia (Personas y Componentes), polimorfismo (unidades concretas) y separación de responsabilidades (gestores vs modelos).
 - Expliquen la persistencia simple basada en archivos de texto (qué se guarda y por qué), y propongan mejoras (por ejemplo usar una base de datos si se pide escala).
-
-
----
-
