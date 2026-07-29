@@ -349,7 +349,7 @@ public interface ILeerYValidar
     // Para la sangre El volumen de Glóbulos Rojos debe estar entre 200 y 350 ml.
     static decimal DecimaaalVolumenExtraiEntera()
     {
-        string mensaje = " -> ";
+        string mensaje = ": ";
         byte puntosValidos = 0;
 
         while (true)
@@ -379,7 +379,7 @@ public interface ILeerYValidar
     
     static decimal DecimaaalVolumenExtraiGlobuRjos()
     {
-        string mensaje = " -> ";
+        string mensaje = ": ";
         byte puntosValidos = 0;
 
         while (true)
@@ -409,7 +409,7 @@ public interface ILeerYValidar
     
     static decimal DecimaaalVolumenExtraiPlasma()
     {
-        string mensaje = " -> ";
+        string mensaje = ": ";
         byte puntosValidos = 0;
 
         while (true)
@@ -438,7 +438,7 @@ public interface ILeerYValidar
     }
     static decimal DecimaaalVolumenExtraiPlaquetas()
     {
-        string mensaje = " -> ";
+        string mensaje = ": ";
         byte puntosValidos = 0;
 
         while (true)
