@@ -5,7 +5,9 @@ namespace ProyectoBancoSangre;
 
 class Program
 {
+    // Se crean y/o instancian los objetos necesarios para el programa
     static GestionDonante gestorDonantes = new GestionDonante();
+    static GestionEmpleado gestorEmpleados = new GestionEmpleado();
     static List<SangreEntera> listaSangreEntera = new List<SangreEntera>();
     static List<GlobulosRojos> listaGlobulosRojos = new List<GlobulosRojos>();
     static List<Plasma> listaplasma = new List<Plasma>();
@@ -13,25 +15,32 @@ class Program
 
     public static void Main(string[] args)
     {
+        // Inicio del programa
         CargarTodosLosDatos();
+        gestorDonantes.CargarArchivo();
+        gestorEmpleados.CargarArchivo();
+        
         bool work = true;
         while (work)
         {
             Console.Clear();
-            Console.WriteLine("MENU Principal");
-            Console.WriteLine("1. Sistema Donadores");
-            Console.WriteLine("2. Sistema Empleados");
-            Console.WriteLine("3. Sistema Donaciones");
-            Console.WriteLine("4. Salir");
+            Console.WriteLine("╔═════════════════════════════╗");
+            Console.WriteLine("║       MENU PRINCIPAL        ║");
+            Console.WriteLine("╠═════════════════════════════╣");
+            Console.WriteLine("║    1. Sistema Donadores     ║");
+            Console.WriteLine("║    2. Sistema Empleados     ║");
+            Console.WriteLine("║    3. Sistema Donaciones    ║");
+            Console.WriteLine("║    4. Salir                 ║");
+            Console.WriteLine("╚═════════════════════════════╝");
             string a = Console.ReadLine();
-            // ... (dentro de tu while del Main)
+            
             switch (a)
             {
                 case "1":
                     SistemaDonadores();
                     break;
                 case "2":
-                    // SistemaEmpleados()
+                    SistemaEmpleados();
                     break;
                 case "3":
                     SistemaDonaciones();
@@ -49,18 +58,21 @@ class Program
         while (work)
         {
             Console.Clear();
-            Console.WriteLine("MENU Donaciones");
-            Console.WriteLine("1. Registrar unidad entera de sangre");
-            Console.WriteLine("2. Registrar unidad de plasma");
-            Console.WriteLine("3. Registrar unidad de plaquetas");
-            Console.WriteLine("4. Registrar unidad de globulos rojos");
-            Console.WriteLine("5. Mostrar inventario de Sangre Entera");
-            Console.WriteLine("6. Mostrar inventario de Plasma");
-            Console.WriteLine("7. Mostrar inventario de Plaquetas");
-            Console.WriteLine("8. Mostrar inventario de Globulos rojos");
-            Console.WriteLine("9. Mostrar el inventario completo");
-            Console.WriteLine("10. Volver al menú principal");
-            Console.WriteLine("11. Guardar todos los datos");
+            Console.WriteLine("╔═══════════════════════════════════════════════╗");
+            Console.WriteLine("║               MENU Donaciones                 ║");
+            Console.WriteLine("╠═══════════════════════════════════════════════╣");
+            Console.WriteLine("║    1. Registrar unidad entera de sangre       ║");
+            Console.WriteLine("║    2. Registrar unidad de plasma              ║");
+            Console.WriteLine("║    3. Registrar unidad de plaquetas           ║");
+            Console.WriteLine("║    4. Registrar unidad de globulos rojos      ║");
+            Console.WriteLine("║    5. Mostrar inventario de Sangre Entera     ║");
+            Console.WriteLine("║    6. Mostrar inventario de Plasma            ║");
+            Console.WriteLine("║    7. Mostrar inventario de Plaquetas         ║");
+            Console.WriteLine("║    8. Mostrar inventario de Globulos rojos    ║");
+            Console.WriteLine("║    9. Mostrar el inventario completo          ║");
+            Console.WriteLine("║    10. Volver al menú principal               ║");
+            Console.WriteLine("║    11. Guardar todos los datos                ║");
+            Console.WriteLine("╚═══════════════════════════════════════════════╝");
             string a = Console.ReadLine();
             
             switch (a)
@@ -191,7 +203,6 @@ class Program
                     if (listaSangreEntera.Count == 0) Console.WriteLine("No hay bolsas registradas.");
                     foreach (SangreEntera u in listaSangreEntera)
                     {
-                        // Envolvemos el generador en un WriteLine para que se vea en pantalla
                         Console.WriteLine(u.GenerarEtiqueta());
                         Console.WriteLine("--------------------------------------------------");
                     }
@@ -270,8 +281,10 @@ class Program
                     break;
                     
                 default:
+                    Console.Clear();
                     Console.WriteLine("\nOpción no válida.");
                     Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.Clear();
                     Console.ReadKey();
                     break;
                 case "11":
@@ -286,13 +299,17 @@ class Program
         while (work)
         {
             Console.Clear();
-            Console.WriteLine("MENU Donadores");
-            Console.WriteLine("1. Registrar nuevo donante");
-            Console.WriteLine("2. Listar todos los donantes");
-            Console.WriteLine("3. Buscar donante");
-            Console.WriteLine("4. Actualizar datos de un donante");
-            Console.WriteLine("5. Eliminar donante");
-            Console.WriteLine("6. Volver al menú principal");
+            Console.WriteLine("╔═════════════════════════════════════════╗");
+            Console.WriteLine("║            MENU DONADORES               ║");
+            Console.WriteLine("╠═════════════════════════════════════════╣");
+            Console.WriteLine("║    1. Registrar nuevo donante           ║");
+            Console.WriteLine("║    2. Listar todos los donantes         ║");
+            Console.WriteLine("║    3. Buscar donante                    ║");
+            Console.WriteLine("║    4. Actualizar datos de un donante    ║");
+            Console.WriteLine("║    5. Eliminar donante                  ║");
+            Console.WriteLine("║    6. Guardar datos de los donantes     ║");
+            Console.WriteLine("║    7. Volver al menú principal          ║");
+            Console.WriteLine("╚═════════════════════════════════════════╝");
             
             Console.Write("Seleccione una opción: ");
             string a = Console.ReadLine();
@@ -302,7 +319,6 @@ class Program
                 case "1":
                     Console.Clear();
                     Console.WriteLine("--- REGISTRO DE DONANTE ---");
-                    // Llamamos al método que programó tu compañero
                     gestorDonantes.Registrar(); 
                     break;
 
@@ -331,12 +347,90 @@ class Program
                     break;
 
                 case "6":
-                    work = false; // Rompe el ciclo para volver al Menú Principal
+                    gestorDonantes.GuardarArchivo();
+                    break;
+                
+                case "7":
+                    work = false; // Pa romper el ciclo y volver al Menú Principal
                     break;
 
                 default:
+                    Console.Clear();
                     Console.WriteLine("\n Opción no válida.");
                     Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.Clear();
+                    Console.ReadKey();
+                    break;
+            }
+        }
+    }
+    
+    public static void SistemaEmpleados()
+    {
+        bool work = true;
+        while (work)
+        {
+            Console.Clear();
+            Console.WriteLine("╔══════════════════════════════════════════╗");
+            Console.WriteLine("║           MENU EMPLEADOS                 ║");
+            Console.WriteLine("╠══════════════════════════════════════════╣");
+            Console.WriteLine("║    1. Registrar nuevo empleado           ║");
+            Console.WriteLine("║    2. Listar todos los empleados         ║");
+            Console.WriteLine("║    3. Buscar empleado                    ║");
+            Console.WriteLine("║    4. Actualizar datos de un empleado    ║");
+            Console.WriteLine("║    5. Eliminar empleado                  ║");
+            Console.WriteLine("║    6. Guardar datos de los empleados     ║");
+            Console.WriteLine("║    7. Volver al menú principal           ║");
+            Console.WriteLine("╚══════════════════════════════════════════╝");
+            
+            Console.Write("Seleccione una opción: ");
+            string a = Console.ReadLine();
+            
+            switch (a)
+            {
+                case "1":
+                    Console.Clear();
+                    Console.WriteLine("--- REGISTRO DE EMPLEADO ---");
+                    gestorEmpleados.Registrar(); 
+                    break;
+
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("--- LISTA DE EMPLEADOS ---");
+                    gestorEmpleados.Listar();
+                    break;
+
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine("--- BÚSQUEDA DE EMPLEADO ---");
+                    gestorEmpleados.Buscar();
+                    break;
+
+                case "4":
+                    Console.Clear();
+                    Console.WriteLine("--- ACTUALIZAR EMPLEADO ---");
+                    gestorEmpleados.Actualizar();
+                    break;
+
+                case "5":
+                    Console.Clear();
+                    Console.WriteLine("--- ELIMINAR EMPLEADO ---");
+                    gestorEmpleados.Eliminar();
+                    break;
+
+                case "6":
+                    gestorEmpleados.GuardarArchivo();
+                    break;
+                
+                case "7":
+                    work = false; // Pa romper el ciclo y volver al Menú Principal
+                    break;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine("\n Opción no válida.");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.Clear();
                     Console.ReadKey();
                     break;
             }
