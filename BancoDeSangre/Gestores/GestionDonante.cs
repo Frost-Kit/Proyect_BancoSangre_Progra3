@@ -108,11 +108,11 @@ public class GestionDonante : IGestionar
         {
             Console.Write("--- REGISTRO DE DONANTE ---\n" +
                           "Ingrese los datos:\n" +
-                          " Nombre -> ");
+                          " Nombre");
             string nombre = ILeerYValidar.Nombre();
-            Console.Write(" C.I. -> ");
+            Console.Write(" C.I.");
             string ci = ILeerYValidar.Ci();
-            Console.Write(" Telefono -> ");
+            Console.Write(" Telefono");
             string telefono = ILeerYValidar.Telefono();
             Console.Write(" Correo Electronico");
             string email = ILeerYValidar.Correo();
@@ -126,7 +126,7 @@ public class GestionDonante : IGestionar
             Console.Write(" Peso");
             double peso = ILeerYValidar.DoubleeePeso();
             Console.Write(" Altura");
-            double altura = ILeerYValidar.Doubleee();
+            double altura = ILeerYValidar.DoubleeeAltura();
             
             Lista.Add( new Donante( Guid.CreateVersion7(), nombre, ci, telefono, email, edad, tipSangre, tipRh, peso, altura) );
 

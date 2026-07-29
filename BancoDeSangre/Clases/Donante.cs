@@ -69,7 +69,7 @@ public class Donante : Persona
         else HistorialDonaciones = historialDonaciones;
     }
 
-    string FormatearHistorial()
+    string FormatearHistorial(List<UnidadExtraida> listaaaUnidades)
     {
         string histoFormateado = string.Empty;
 
@@ -133,21 +133,21 @@ public class Donante : Persona
             {
                 case ConsoleKey.D1:
                     Console.Write($" - Nombre ACTUAL => {Nombre} -\n" +
-                                  $"Ingrese el nuevo nombre -> ");
+                                  $"Ingrese el nuevo nombre");
                     Nombre = ILeerYValidar.Nombre();
                     Console.Clear();
                     break;
 
                 case ConsoleKey.D2:
                     Console.Write($" - C.I. ACTUAL => {CI} -\n" +
-                                  $"Ingrese el nuevo CI -> ");
+                                  $"Ingrese el nuevo CI");
                     CI = ILeerYValidar.Ci();
                     Console.Clear();
                     break;
 
                 case ConsoleKey.D3:
                     Console.Write($" - Telefono ACTUAL => {Telefono} -\n" +
-                                  $"Ingrese el nuevo telefono -> ");
+                                  $"Ingrese el nuevo telefono");
                     Telefono = ILeerYValidar.Telefono();
                     Console.Clear();
                     break;
@@ -162,7 +162,7 @@ public class Donante : Persona
                 case ConsoleKey.D5:
                     Console.Write($" - Edad ACTUAL => {Edad} -\n" +
                                   $"Ingrese la nueva edad");
-                    Edad = ILeerYValidar.Byteee();
+                    Edad = ILeerYValidar.ByteeeEdadDonante();
                     Console.Clear();
                     break;
 
@@ -195,7 +195,7 @@ public class Donante : Persona
                 case ConsoleKey.D9:
                     Console.Write($" - Altura ACTUAL => {Altura} -\n" +
                                   $"Ingrese la nueva altura");
-                    Altura = ILeerYValidar.Doubleee();
+                    Altura = ILeerYValidar.DoubleeeAltura();
                     Console.Clear();
                     break;
 

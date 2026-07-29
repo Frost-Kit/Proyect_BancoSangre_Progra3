@@ -74,13 +74,13 @@ public class GestionEmpleado : IGestionar
             string nom = ILeerYValidar.Nombre();
             Console.Write(" C.I.");
             string ci = ILeerYValidar.Ci();
-            Console.Write(" Telefono -> ");
+            Console.Write(" Telefono");
             string telefono = ILeerYValidar.Telefono();
             Console.Write(" Correo Electronico");
             string email = ILeerYValidar.Correo();
             Console.Write(" Edad");
             byte edad = ILeerYValidar.ByteeeEdadEmpleado();
-            Console.Write(" Cargo -> ");
+            Console.Write(" Cargo");
             string cargo = ILeerYValidar.Nombre();
             
             Lista.Add( new Empleado( Guid.CreateVersion7() ,nom, ci, telefono, email, edad, cargo) );

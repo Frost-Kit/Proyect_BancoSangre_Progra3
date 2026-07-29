@@ -68,17 +68,17 @@ public class Empleado : Persona
             {
                 case  ConsoleKey.D1:
                     Console.Write($" - Nombre ACTUAL => {Nombre} -\n" +
-                                  $"Ingrese el nuevo nombre -> ");
+                                  $"Ingrese el nuevo nombre");
                     Nombre = ILeerYValidar.Nombre();
                     break;
                 case ConsoleKey.D2:
                     Console.Write($" - C.I. ACTUAL => {CI} -\n" +
-                                  $"Ingrese el nuevo CI -> ");
+                                  $"Ingrese el nuevo CI");
                     CI = ILeerYValidar.Ci();
                     break;
                 case ConsoleKey.D3:
                     Console.Write($" - Telefono ACTUAL => {Telefono} -\n" +
-                                  $"Ingrese el nuevo telefono -> ");
+                                  $"Ingrese el nuevo telefono");
                     Telefono = ILeerYValidar.Telefono();
                     break;
                 case ConsoleKey.D4:
@@ -93,7 +93,7 @@ public class Empleado : Persona
                     break;
                 case ConsoleKey.D6:
                     Console.Write($" - Cargo ACTUAL => {Cargo} -\n" +
-                                  $"Ingrese el nuevo cargo -> ");
+                                  $"Ingrese el nuevo cargo");
                     Cargo = ILeerYValidar.Nombre();
                     break;
                 case ConsoleKey.D0:

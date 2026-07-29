@@ -1,5 +1,6 @@
 ﻿using ProyectoBancoSangre.Clases;
 using ProyectoBancoSangre.Gestores;
+using ProyectoBancoSangre.Interfaces;
 
 namespace ProyectoBancoSangre;
 
@@ -93,7 +94,7 @@ class Program
                     {
                         Donante donanteReal = GestionDonante.Lista[indice];
                         Console.Write("Ingrese el volumen extraído (ml): ");
-                        decimal volumen = decimal.Parse(Console.ReadLine());
+                        decimal volumen = ILeerYValidar.DecimaaalVolumenExtraiEntera();
                         Console.Write("Ingrese el lugar de extracción: ");
                         string lugar = Console.ReadLine();
                         DateTime fechaActual = DateTime.Now;
@@ -123,7 +124,7 @@ class Program
                     {
                         Donante donanteReal = GestionDonante.Lista[indice];
                         Console.Write("Ingrese el volumen extraído (ml): ");
-                        decimal volumen = decimal.Parse(Console.ReadLine());
+                        decimal volumen = ILeerYValidar.DecimaaalVolumenExtraiPlasma();
                         Console.Write("Ingrese el lugar de extracción: ");
                         string lugar = Console.ReadLine();
                         DateTime fechaActual = DateTime.Now;
@@ -153,7 +154,7 @@ class Program
                     {
                         Donante donanteReal = GestionDonante.Lista[indice];
                         Console.Write("Ingrese el volumen extraído (ml): ");
-                        decimal volumen = decimal.Parse(Console.ReadLine());
+                        decimal volumen = ILeerYValidar.DecimaaalVolumenExtraiPlaquetas();
                         Console.Write("Ingrese el lugar de extracción: ");
                         string lugar = Console.ReadLine();
                         DateTime fechaActual = DateTime.Now;
@@ -183,7 +184,7 @@ class Program
                     {
                         Donante donanteReal = GestionDonante.Lista[indice];
                         Console.Write("Ingrese el volumen extraído (ml): ");
-                        decimal volumen = decimal.Parse(Console.ReadLine());
+                        decimal volumen = ILeerYValidar.DecimaaalVolumenExtraiGlobuRjos();
                         Console.Write("Ingrese el lugar de extracción: ");
                         string lugar = Console.ReadLine();
                         DateTime fechaActual = DateTime.Now;
