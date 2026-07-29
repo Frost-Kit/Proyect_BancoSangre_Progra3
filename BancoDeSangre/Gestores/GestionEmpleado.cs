@@ -226,11 +226,13 @@ public class GestionEmpleado : IGestionar
         if (opcionConfirmar.ToLower() == "si")
         {
             Lista.RemoveAt(indiceObjetivo);
-            Console.WriteLine(" Empleado Eliminado!!!");
+            Console.WriteLine(" Empleado Eliminado!!!\n Pulse cualquier tecla para continuar...");
+            Console.ReadKey();
             return;
         }
         
-        Console.WriteLine("*** OPCION INVALIDA ***\n" +
-                          "Se Cancela la eliminacion, Volviendo...");
+        Console.WriteLine("*** OPCION INVALIDA o Puso No ***\n" +
+                          "Se Cancela la eliminacion, Pulse cualquier tecla para continuar...");
+        Console.ReadKey();
     }
 }
