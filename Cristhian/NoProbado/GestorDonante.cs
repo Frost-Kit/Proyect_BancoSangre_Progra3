@@ -132,7 +132,7 @@
 //     }
 //     
 //     // Esto devuelve el indice, asi consultan en la lista con el indice que les de
-//     // Ejemplo: GestionPersonal.Lista[indiceObjetivo].MostrarDatos();
+//     // Ejemplo: GestionEmpleado.Lista[indiceObjetivo].MostrarDatos();
 //     public override int BuscarIndice(Guid idBuscado)
 //     {
 //         foreach (var donante in Lista)

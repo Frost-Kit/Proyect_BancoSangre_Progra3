@@ -1,4 +1,4 @@
-namespace Proyect_BancoSangre_Consola.Cristhian;
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
 public class GestionDonante : IGestionar
 {
@@ -103,38 +103,36 @@ public class GestionDonante : IGestionar
 
         do
         {
-            Console.Write(" * REGISTRO DE DONANTE *\n" +
-                          "Ingrese:\n" +
+            Console.Write("--- REGISTRO DE DONANTE ---\n" +
+                          "Ingrese los datos:\n" +
                           " Nombre -> ");
-            string nombre = Console.ReadLine();
+            string nombre = ILeerYValidar.Nombre();
             Console.Write(" C.I. -> ");
-            string ci = Console.ReadLine();
+            string ci = ILeerYValidar.Ci();
             Console.Write(" Telefono -> ");
-            string telefono = Console.ReadLine();
+            string telefono = ILeerYValidar.Telefono();
             Console.Write(" Correo Electronico");
             string email = ILeerYValidar.Correo();
             Console.Write(" Edad");
-            byte edad = ILeerYValidar.Byteee();
-            Console.Write(" Tipo de sangre\n" +
-                          "\tOpciones Validas: A - B - AB - O\n" +
-                          " -> ");
+            byte edad = ILeerYValidar.ByteeeEdadDonante();
+            Console.Write(" Tipo de sangre (A / B / AB / O) -> ");
             TipoSangre tipSangre = Enum.TryParse(Console.ReadLine().Trim(),true, out TipoSangre tipoSangreValidada) ? 
                 tipoSangreValidada : TipoSangre.O;
-            Console.Write(" Tipo de RH\n" +
-                          "\tOpciones Validas: Positivo - Negativo\n" +
-                          " Aqui");
+            Console.Write(" Tipo de RH (Positivo / Negativo)");
             TipoRH tipRh = ILeerYValidar.Rhhh();
             Console.Write(" Peso");
-            double peso = ILeerYValidar.Doubleee();
+            double peso = ILeerYValidar.DoubleeePeso();
             Console.Write(" Altura");
             double altura = ILeerYValidar.Doubleee();
             
             Lista.Add( new Donante( Guid.CreateVersion7(), nombre, ci, telefono, email, edad, tipSangre, tipRh, peso, altura) );
-            
+
+            Console.Clear();
             Console.Write("Donante Registrado!!!\n" +
                           "Pulse:\n" +
                           " Espacio (o cualquier tecla) para continuar con el registro.\n" +
                           " ENTER para terminar el registro.");
+
             opcionContinuarRegistro = Console.ReadKey().Key;
             Console.WriteLine("\n");
             
@@ -166,9 +164,30 @@ public class GestionDonante : IGestionar
         Console.Write("Pulse cualquier tecla para continuar...");
         Console.ReadKey();
     }
-    
+
+    // Metodos que devuelven al donante Buscado, ya sea por IdDonante o CI
+    public Donante? ObtenerDonante(Guid idBuscado)
+    {
+        foreach (var donante in Lista)
+        {
+            if (donante.IdDonante == idBuscado) return donante;
+        }
+
+        return null;
+    }
+
+    public Donante? ObtenerDonante(string ciBuscado)
+    {
+        foreach (var donante in Lista)
+        {
+            if (donante.CI == ciBuscado) return donante;
+        }
+
+        return null;
+    }
+
     // Esto devuelve el indice, asi consultan en la lista con el indice que les de
-    // Ejemplo: GestionPersonal.Lista[indiceObjetivo].MostrarDatos();
+    // Ejemplo: GestionEmpleado.Lista[indiceObjetivo].MostrarDatos();
     public int BuscarIndice(Guid idBuscado)
     {
         foreach (var donante in Lista)

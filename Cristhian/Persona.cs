@@ -1,5 +1,5 @@
-using Proyect_BancoSangre_Consola.Cristhian.NoProbado;
-namespace Proyect_BancoSangre_Consola.Cristhian;
+using Proyect_BancoSangre_Progra3.Cristhian.NoProbado;
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
 public abstract class Persona : INotificar//, IMostrable, IActualizable
 {

@@ -1,13 +1,13 @@
-namespace Proyect_BancoSangre_Consola.Cristhian;
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
-public class Personal : Persona
+public class Empleado : Persona
 {
-    private Guid _idPersonal;
+    private Guid _idEmpleado;
     private string _cargo;
-    public Guid IdPersonal
+    public Guid IdEmpleado
     {
-        get { return _idPersonal; }
-        protected set { _idPersonal = value; }
+        get { return _idEmpleado; }
+        protected set { _idEmpleado = value; }
     }
     public string Cargo
     {
@@ -15,24 +15,24 @@ public class Personal : Persona
         protected set { _cargo = value; }
     }
 
-    public Personal()
+    public Empleado()
     {
-        IdPersonal = Guid.Empty;
+        IdEmpleado = Guid.Empty;
         Cargo = "PorAsignar";
     }
 
-    public Personal(Guid idPersonal,string nombre, string ci, string telefono, string email, byte edad, string cargo)
+    public Empleado(Guid idEmpleado,string nombre, string ci, string telefono, string email, byte edad, string cargo)
         :base(nombre, ci, telefono, email, edad)
     {
-        IdPersonal = idPersonal;
+        IdEmpleado = idEmpleado;
         Cargo = cargo;
     }
 
     public override void MostrarDatos()
     {
         Console.WriteLine($"===========================================\n" +
-                          $"\tDatos Personal\n" +
-                          $" - ID: {IdPersonal}\n" +
+                          $"\tDatos Empleado\n" +
+                          $" - ID: {IdEmpleado}\n" +
                           $" - Nombre: {Nombre}\n" +
                           $" - CI: {CI}\n" +
                           $" - Telefono: {Telefono}\n" +
@@ -49,12 +49,12 @@ public class Personal : Persona
         {
             Console.Clear();
             
-            Console.Write($"\n Actualizar Datos del Chambeador (ID: {IdPersonal})\n" +
+            Console.Write($"\n Actualizar Datos del Chambeador (ID: {IdEmpleado})\n" +
                           $"╔════════════════════════════════════════════════╗\n" +
                           $"║  Pulse:                                        ║\n" +
-                          $"║       ├ 1 para Cambiar el nombre               ║\n" +
+                          $"║       ├ 1 para Cambiar el Nombre               ║\n" +
                           $"║       ├ 2 para Cambiar el C.I.                 ║\n" +
-                          $"║       ├ 3 para Cambiar el telefono             ║\n" +
+                          $"║       ├ 3 para Cambiar el Telefono             ║\n" +
                           $"║       ├ 4 para Cambiar el Correo electronico   ║\n" +
                           $"║       ├ 5 para Cambiar la Edad                 ║\n" +
                           $"║       └ 6 para Cambiar el Cargo                ║\n" +
@@ -67,17 +67,17 @@ public class Personal : Persona
                 case  ConsoleKey.D1:
                     Console.Write($" - Nombre ACTUAL => {Nombre} -\n" +
                                   $"Ingrese el nuevo nombre -> ");
-                    Nombre = Console.ReadLine().Trim();
+                    Nombre = ILeerYValidar.Nombre();
                     break;
                 case ConsoleKey.D2:
                     Console.Write($" - C.I. ACTUAL => {CI} -\n" +
                                   $"Ingrese el nuevo CI -> ");
-                    CI = Console.ReadLine().Trim();
+                    CI = ILeerYValidar.Ci();
                     break;
                 case ConsoleKey.D3:
                     Console.Write($" - Telefono ACTUAL => {Telefono} -\n" +
                                   $"Ingrese el nuevo telefono -> ");
-                    Telefono = Console.ReadLine().Trim();
+                    Telefono = ILeerYValidar.Telefono();
                     break;
                 case ConsoleKey.D4:
                     Console.Write($" - Correo Electronico ACTUAL => {CorreoElectronico} -\n" +
@@ -87,12 +87,12 @@ public class Personal : Persona
                 case ConsoleKey.D5:
                     Console.Write($" - Edad ACTUAL => {Edad} -\n" +
                                   $"Ingrese la nueva edad");
-                    Edad = ILeerYValidar.Byteee();
+                    Edad = ILeerYValidar.ByteeeEdadEmpleado();
                     break;
                 case ConsoleKey.D6:
                     Console.Write($" - Cargo ACTUAL => {Cargo} -\n" +
                                   $"Ingrese el nuevo cargo -> ");
-                    Cargo = Console.ReadLine().Trim();
+                    Cargo = ILeerYValidar.Nombre();
                     break;
                 case ConsoleKey.D0:
                     Console.Write("Volviendo...");

@@ -1,18 +1,4 @@
-namespace Proyect_BancoSangre_Consola.Cristhian;
-
-public enum TipoSangre
-{
-    A,
-    B,
-    AB,
-    O
-}
-
-public enum TipoRH
-{
-    Positivo,
-    Negativo
-}
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
 public class Donante : Persona
 {
@@ -85,13 +71,10 @@ public class Donante : Persona
     {
         string histoFormateado = string.Empty;
 
-        foreach (var donacion in HistorialDonaciones)
+        foreach (var idDonacion in HistorialDonaciones)
         {
-            // POR HACER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // Necesito el 
-            // int indiceDonacion = GestionDonaciones.Lista[donacion].Fecha;
-            // histoFormateado += $"  * {donacion.ToString("yyyy/MM/dd hh:mm tt")}\n";
-            histoFormateado += $"  * {donacion.ToString("yyyy/MM/dd hh:mm tt")}\n";
+            //var donacion = GestionUnidades.BuscarYDar(idDonacion);
+            //histoFormateado += $"  * {donacion.FechaExtraccion.ToString("yyyy/MM/dd hh:mm tt")}\n";
         }
 
         return histoFormateado;
@@ -149,21 +132,21 @@ public class Donante : Persona
                 case ConsoleKey.D1:
                     Console.Write($" - Nombre ACTUAL => {Nombre} -\n" +
                                   $"Ingrese el nuevo nombre -> ");
-                    Nombre = Console.ReadLine().Trim();
+                    Nombre = ILeerYValidar.Nombre();
                     Console.Clear();
                     break;
 
                 case ConsoleKey.D2:
                     Console.Write($" - C.I. ACTUAL => {CI} -\n" +
                                   $"Ingrese el nuevo CI -> ");
-                    CI = Console.ReadLine().Trim();
+                    CI = ILeerYValidar.Ci();
                     Console.Clear();
                     break;
 
                 case ConsoleKey.D3:
                     Console.Write($" - Telefono ACTUAL => {Telefono} -\n" +
                                   $"Ingrese el nuevo telefono -> ");
-                    Telefono = Console.ReadLine().Trim();
+                    Telefono = ILeerYValidar.Telefono();
                     Console.Clear();
                     break;
 
@@ -203,7 +186,7 @@ public class Donante : Persona
                 case ConsoleKey.D8:
                     Console.Write($" - Peso ACTUAL => {Peso} -\n" +
                                   $"Ingrese el nuevo peso");
-                    Peso = ILeerYValidar.Doubleee();
+                    Peso = ILeerYValidar.DoubleeePeso();
                     Console.Clear();
                     break;
 
@@ -226,6 +209,6 @@ public class Donante : Persona
 
     public void RegistrarDonancion(Guid IdDonacion) => HistorialDonaciones.Add(IdDonacion);
 
-    public Guid DarUltimafechaDonacion() => HistorialDonaciones[^1];
+    public Guid DarIDUltimaDonacion() => HistorialDonaciones[^1];
 }
 

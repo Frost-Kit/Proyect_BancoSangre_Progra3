@@ -1,17 +1,17 @@
 // namespace Proyect_BancoSangre_Consola.Cristhian.NoProbado;
 //
-// public class GestorPersonal : GestorBase<Personal>
+// public class GestorPersonal : GestorBase<Empleado>
 // {
-//     private string _rutaArchivoPersonal = @"Personal.txt";
+//     private string _rutaArchivoEmpleado = @"Empleado.txt";
 //     public GestorPersonal() {}
 //
 //     public override void CargarDatos()
 //     {
-//         if ( !File.Exists(_rutaArchivoPersonal) ) return;
+//         if ( !File.Exists(_rutaArchivoEmpleado) ) return;
 //
-//         Lista = new List<Personal>();
+//         Lista = new List<Empleado>();
 //
-//         using (StreamReader archivoPersonal = new StreamReader(_rutaArchivoPersonal))
+//         using (StreamReader archivoPersonal = new StreamReader(_rutaArchivoEmpleado))
 //         {
 //             string linea;
 //
@@ -19,7 +19,7 @@
 //             {
 //                 string[] datosPersonal = linea.Split('░');
 //                 
-//                 Lista.Add( new Personal(
+//                 Lista.Add( new Empleado(
 //                     Guid.Parse(datosPersonal[0]),
 //                     datosPersonal[1],
 //                     datosPersonal[2],
@@ -37,11 +37,11 @@
 //     {
 //         if (Lista == null) return;
 //
-//         using (StreamWriter archivoPersonal = new StreamWriter(_rutaArchivoPersonal))
+//         using (StreamWriter archivoPersonal = new StreamWriter(_rutaArchivoEmpleado))
 //         {
 //             foreach (var personal in Lista)
 //             {
-//                 archivoPersonal.WriteLine($"{personal.IdPersonal}░" +
+//                 archivoPersonal.WriteLine($"{personal.IdEmpleado}░" +
 //                                           $"{personal.Nombre}░" +
 //                                           $"{personal.CI}░" +
 //                                           $"{personal.Telefono}░" +
@@ -74,9 +74,9 @@
 //             Console.Write(" Cargo -> ");
 //             string cargo = Console.ReadLine().Trim();
 //             
-//             Lista.Add( new Personal( Guid.CreateVersion7() ,nom, ci, telefono, email, edad, cargo) );
+//             Lista.Add( new Empleado( Guid.CreateVersion7() ,nom, ci, telefono, email, edad, cargo) );
 //             
-//             Console.Write("Personal Registrado!!!\n" +
+//             Console.Write("Empleado Registrado!!!\n" +
 //                           "Pulse:\n" +
 //                           " Espacio (o cualquier tecla) para continuar con el registro.\n" +
 //                           " ENTER para terminar el registro.");
@@ -97,12 +97,12 @@
 //         {
 //             if ( Lista.IndexOf(chambeador) != Lista.Count - 1 )
 //             {
-//                 Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdPersonal} |\n" +
+//                 Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdEmpleado} |\n" +
 //                                   $"├{new string('─',32)}┼{new string('─',10)}┼{new string('─',10)}┼{new string('─',27)}┼{new string('─',9)}┼{new string('─',22)}┼{new string('─',38)}┤");
 //             }
 //             else
 //             {
-//                 Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdPersonal} |\n" +
+//                 Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdEmpleado} |\n" +
 //                                   $"└{new string('─',32)}┴{new string('─',10)}┴{new string('─',10)}┴{new string('─',27)}┴{new string('─',9)}┴{new string('─',22)}┴{new string('─',38)}┘");
 //             }
 //         }
@@ -114,7 +114,7 @@
 //     {
 //         foreach (var personal in Lista)
 //         {
-//             if (personal.IdPersonal == idBuscado) return Lista.IndexOf(personal);
+//             if (personal.IdEmpleado == idBuscado) return Lista.IndexOf(personal);
 //         }
 //         
 //         return -1;

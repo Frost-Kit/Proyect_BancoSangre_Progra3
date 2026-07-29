@@ -1,38 +1,38 @@
-namespace Proyect_BancoSangre_Consola.Cristhian;
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
-public class GestionPersonal : IGestionar
+public class GestionEmpleado : IGestionar
 {
-    private static List<Personal> _lista = [];
-    public static List<Personal> Lista 
+    private static List<Empleado> _lista = [];
+    public static List<Empleado> Lista 
     {
         get { return _lista; }
         protected set { _lista = value; }
     }
 
-    private string _rutaArchivoPersonal = @"Personal.txt";
+    private string _rutaArchivoEmpleado = @"Empleado.txt";
     
-    public GestionPersonal() {}
+    public GestionEmpleado() {}
 
     public void CargarArchivo()
     {
-        if ( !File.Exists(_rutaArchivoPersonal) ) return;
+        if ( !File.Exists(_rutaArchivoEmpleado) ) return;
         
-        using (StreamReader archivoPersonal = new StreamReader(_rutaArchivoPersonal))
+        using (StreamReader archivoEmpleado = new StreamReader(_rutaArchivoEmpleado))
         {
             string linea;
 
-            while ((linea = archivoPersonal.ReadLine()) != null)
+            while ((linea = archivoEmpleado.ReadLine()) != null)
             {
-                string[] datosPersonal = linea.Split('░');
+                string[] datoEmpleado = linea.Split('░');
                 
-                Lista.Add( new Personal(
-                    Guid.Parse(datosPersonal[0]),
-                    datosPersonal[1],
-                    datosPersonal[2],
-                    datosPersonal[3],
-                    datosPersonal[4],
-                    Convert.ToByte(datosPersonal[5]),
-                    datosPersonal[6])
+                Lista.Add( new Empleado(
+                    Guid.Parse(datoEmpleado[0]),
+                    datoEmpleado[1],
+                    datoEmpleado[2],
+                    datoEmpleado[3],
+                    datoEmpleado[4],
+                    Convert.ToByte(datoEmpleado[5]),
+                    datoEmpleado[6])
                 );
             }
         }
@@ -43,17 +43,17 @@ public class GestionPersonal : IGestionar
     {
         if (Lista == null) return;
 
-        using (StreamWriter archivoPersonal = new StreamWriter(_rutaArchivoPersonal))
+        using (StreamWriter archivoEmpleado = new StreamWriter(_rutaArchivoEmpleado))
         {
-            foreach (var personal in Lista)
+            foreach (var chambeador in Lista)
             {
-                archivoPersonal.WriteLine($"{personal.IdPersonal}░" +
-                                          $"{personal.Nombre}░" +
-                                          $"{personal.CI}░" +
-                                          $"{personal.Telefono}░" +
-                                          $"{personal.CorreoElectronico}░" +
-                                          $"{personal.Edad}░" +
-                                          $"{personal.Cargo}");
+                archivoEmpleado.WriteLine($"{chambeador.IdEmpleado}░" +
+                                          $"{chambeador.Nombre}░" +
+                                          $"{chambeador.CI}░" +
+                                          $"{chambeador.Telefono}░" +
+                                          $"{chambeador.CorreoElectronico}░" +
+                                          $"{chambeador.Edad}░" +
+                                          $"{chambeador.Cargo}");
             }
         }
         Console.WriteLine("*** Guardado de datos exitoso!!! ***"); 
@@ -65,24 +65,25 @@ public class GestionPersonal : IGestionar
 
         do
         {
-            Console.Write(" * REGISTRO DE PERSONAL *\n" +
+            Console.Write("--- REGISTRO DE EMPLEADO ---\n" +
                           "Ingrese:\n" +
-                          " Nombre -> ");
-            string nom = Console.ReadLine().Trim();
-            Console.Write(" C.I. -> ");
-            string ci = Console.ReadLine().Trim();
+                          " Nombre");
+            string nom = ILeerYValidar.Nombre();
+            Console.Write(" C.I.");
+            string ci = ILeerYValidar.Ci();
             Console.Write(" Telefono -> ");
-            string telefono = Console.ReadLine().Trim();
+            string telefono = ILeerYValidar.Telefono();
             Console.Write(" Correo Electronico");
             string email = ILeerYValidar.Correo();
             Console.Write(" Edad");
-            byte edad = ILeerYValidar.Byteee();
+            byte edad = ILeerYValidar.ByteeeEdadEmpleado();
             Console.Write(" Cargo -> ");
-            string cargo = Console.ReadLine().Trim();
+            string cargo = ILeerYValidar.Nombre();
             
-            Lista.Add( new Personal( Guid.CreateVersion7() ,nom, ci, telefono, email, edad, cargo) );
-            
-            Console.Write("Personal Registrado!!!\n" +
+            Lista.Add( new Empleado( Guid.CreateVersion7() ,nom, ci, telefono, email, edad, cargo) );
+
+            Console.Clear();
+            Console.Write("Empleado Registrado!!!\n" +
                           "Pulse:\n" +
                           " Espacio (o cualquier tecla) para continuar con el registro.\n" +
                           " ENTER para terminar el registro.");
@@ -94,35 +95,56 @@ public class GestionPersonal : IGestionar
 
     public void Listar()
     {   
-        Console.WriteLine($"\tLISTA del PERSONAL\n" +
+        Console.WriteLine($"\tLISTA de EMPLEADO\n" +
                           $"┌{new string('─',32)}┬{new string('─',10)}┬{new string('─',10)}┬{new string('─',27)}┬{new string('─',9)}┬{new string('─',22)}┬{new string('─',38)}┐\n" +
-                          $"│ {"NOMBRE COMPLETO",-30} │ {"C.I.",-8} | TELEFONO | {"CORREO ELECTRONICO",-25} | {"EDAD",-7} | {"CARGO",-20} | {"ID PERSONAL", -36} |\n" +
+                          $"│ {"NOMBRE COMPLETO",-30} │ {"C.I.",-8} | TELEFONO | {"CORREO ELECTRONICO",-25} | {"EDAD",-7} | {"CARGO",-20} | {"ID EMPLEADO", -36} |\n" +
                           $"├{new string('─',32)}┼{new string('─',10)}┼{new string('─',10)}┼{new string('─',27)}┼{new string('─',9)}┼{new string('─',22)}┼{new string('─',38)}┤");
 
         foreach (var chambeador in  Lista)
         {
             if ( Lista.IndexOf(chambeador) != Lista.Count - 1 )
             {
-                Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdPersonal} |\n" +
+                Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdEmpleado} |\n" +
                               $"├{new string('─',32)}┼{new string('─',10)}┼{new string('─',10)}┼{new string('─',27)}┼{new string('─',9)}┼{new string('─',22)}┼{new string('─',38)}┤");
             }
             else
             {
-                Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdPersonal} |\n" +
+                Console.WriteLine($"│ {chambeador.Nombre,-30} │ {chambeador.CI,-8} | {chambeador.Telefono} | {chambeador.CorreoElectronico,-25} | {chambeador.Edad,-7} | {chambeador.Cargo,-20} | {chambeador.IdEmpleado} |\n" +
                                   $"└{new string('─',32)}┴{new string('─',10)}┴{new string('─',10)}┴{new string('─',27)}┴{new string('─',9)}┴{new string('─',22)}┴{new string('─',38)}┘");
             }
         }
         Console.Write("Pulse cualquier tecla para continuar...");
         Console.ReadKey();
     }
-    
+
+    // Metodos que devuelven al chambeador Buscado, ya sea por IdEmpleado o CI
+    public Empleado? ObtenerPersonal(Guid idBuscado)
+    {
+        foreach (var personal in Lista)
+        {
+            if (personal.IdEmpleado == idBuscado) return personal;
+        }
+
+        return null;
+    }
+
+    public Empleado? ObtenerPersonal(string ciBuscado)
+    {
+        foreach (var personal in Lista)
+        {
+            if (personal.CI == ciBuscado) return personal;
+        }
+
+        return null;
+    }
+
     // Esto devuelve el indice, asi consultan en la lista con el indice que les de
-    // Ejemplo: GestionPersonal.Lista[indiceObjetivo].MostrarDatos();
+    // Ejemplo: GestionEmpleado.Lista[indiceObjetivo].MostrarDatos();
     public int BuscarIndice(Guid idBuscado)
     {
         foreach (var personal in Lista)
         {
-            if (personal.IdPersonal == idBuscado) return Lista.IndexOf(personal);
+            if (personal.IdEmpleado == idBuscado) return Lista.IndexOf(personal);
         }
         
         return -1;
@@ -141,15 +163,15 @@ public class GestionPersonal : IGestionar
     public void Buscar()
     {
         Console.Clear();
-        Console.WriteLine("Buscar Personal\n" +
-                          "Ingrese el CI del personal a buscar -> ");
+        Console.WriteLine("Buscar Empleado\n" +
+                          "Ingrese el CI del chambeador a buscar -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
         int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
         
         if (indiceObjetivo == -1)
         {
-            Console.WriteLine("*** Personal no encontrado ***");
+            Console.WriteLine("*** Empleado no encontrado ***");
             return;
         }
         
@@ -160,38 +182,38 @@ public class GestionPersonal : IGestionar
     public void Actualizar()
     {
         Console.Clear();
-        Console.WriteLine("Actualizar Personal\n" +
-                          "Ingrese el CI del personal objetivo -> ");
+        Console.WriteLine("Actualizar Empleado\n" +
+                          "Ingrese el CI del chambeador objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
         int indiceObjetivo = BuscarIndice(ciObjetivo); // aqui puede que hacerlo por GUID sea mas complejo para el usuario
         
         if (indiceObjetivo == -1)
         {
-            Console.WriteLine("*** Personal no encontrado ***");
+            Console.WriteLine("*** Empleado no encontrado ***");
             return;
         }
         
         Lista[indiceObjetivo].ActualizarDatos();
-        Console.WriteLine(" Personal Actualizado!!!");
+        Console.WriteLine(" Empleado Actualizado!!!");
     }
 
     public void Eliminar()
     {
         Console.Clear();
-        Console.WriteLine("Eliminar Personal\n" +
-                          "Ingrese el CI del personal objetivo -> ");
+        Console.WriteLine("Eliminar Empleado\n" +
+                          "Ingrese el CI del chambeador objetivo -> ");
         string ciObjetivo = Console.ReadLine().Trim();
         
         int indiceObjetivo = BuscarIndice(ciObjetivo);
         
         if (indiceObjetivo == -1)
         {
-            Console.WriteLine("*** Personal no encontrado ***");
+            Console.WriteLine("*** Empleado no encontrado ***");
             return;
         }
 
-        Console.Write($"Personal por Eliminar\n" +
+        Console.Write($"Empleado por Eliminar\n" +
                       $"\tNombre: {Lista[indiceObjetivo].Nombre} | CI: {Lista[indiceObjetivo].Nombre}\n" +
                       $"¡SE NECESITA CONFIRMACION!\n" +
                       $"¿Esta Seguro de Eliminar a este empleado? (Responda Si o No)\n" +
@@ -201,7 +223,7 @@ public class GestionPersonal : IGestionar
         if (opcionConfirmar.ToLower() == "si")
         {
             Lista.RemoveAt(indiceObjetivo);
-            Console.WriteLine(" Personal Eliminado!!!");
+            Console.WriteLine(" Empleado Eliminado!!!");
             return;
         }
         

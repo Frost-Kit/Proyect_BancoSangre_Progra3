@@ -1,4 +1,4 @@
-namespace Proyect_BancoSangre_Consola.Cristhian;
+namespace Proyect_BancoSangre_Progra3.Cristhian;
 
 public interface INotificar
 {
