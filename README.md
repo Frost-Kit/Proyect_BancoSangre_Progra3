@@ -86,7 +86,7 @@ Notas:
 
 - `BancoDeSangre/Clases/Enumerdadores.cs` — `TipoSangre`, `TipoRH`, `EstadoUnidad` : Enumeradores para representar grupos, factores RH y estados; explíquen cómo ayudan a evitar errores por strings y facilitan validación.
 
-*Consejos*:
+**Consejos**:
 
 - Muestren la arquitectura en capas: `Program` → `Gestores` → `Clases` → `Interfaces`.
 - Destaquen principios de POO aplicados: encapsulación (validaciones en `Persona`/`UnidadExtraida`), herencia (Personas y Componentes), polimorfismo (unidades concretas) y separación de responsabilidades (gestores vs modelos).
